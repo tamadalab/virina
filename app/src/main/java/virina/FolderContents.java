@@ -1,7 +1,11 @@
+package virina;
+
 import java.io.File;
 
 public class FolderContents{
-    public static void main(String[] args) {
+    private static final String API_URL = "https://api.openai.com/v1/engines/gpt-4.0/completions";
+    private static final String API_KEY = "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";
+    public static void main(String... args) {
         if (args.length == 0) {
             System.out.println("フォルダを指定してください。");
             return;
