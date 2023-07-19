@@ -25,10 +25,16 @@ public class FolderContents{
         if (files != null && files.length > 0) {
             System.out.println("フォルダの中身:");
             for (File file : files) {
-                System.out.println(file.getName());
+                api(file);
+                // System.out.println(file.getName());
             }
         } else {
             System.out.println("フォルダは空です。");
         }
+    }
+    public static void api(File file)
+    {
+        System.out.println(file.getName());
+        
     }
 }
