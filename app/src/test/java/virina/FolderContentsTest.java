@@ -14,7 +14,12 @@ class FolderContentsTest {
     @Test
     void main() {
         FolderContents testMain = new FolderContents();
-        testMain.main("~/Desktop/test");
+        testMain.main("../testdata");
+    }
+    @Test
+    void fileFinder() {
+        FolderContents testFileFinder = new FolderContents();
+        testFileFinder.fileFinder(Path.of("./app/src/").toFile());
     }
 
     @Test
