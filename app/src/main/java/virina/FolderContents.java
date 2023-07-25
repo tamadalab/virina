@@ -19,7 +19,7 @@ public class FolderContents
         // 使用するapiのエンジンの記載
         private final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5/completions";
         // api keyの記載
-        private static final String API_KEY = "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";
+        private final String API_KEY = "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";
 
     }
     public void main(String... args)
@@ -46,26 +46,43 @@ public class FolderContents
             return;
         }
 
-        File[] files = folder.listFiles();
+//        File[] files = folder.listFiles();
+        this.fileFinder(folder);
 
-        if (files != null && files.length > 0) {
-            System.out.println("フォルダの中身:");
+//        if (files != null && files.length > 0) {
+//            System.out.println("フォルダの中身:");
+//            for (File file : files) {
+//                if(file.exists()) {
+//                    this.api(file);
+//                    // System.out.println(file.getName());
+//                }
+//            }
+//        }
+//        else {
+//            System.out.println("フォルダは空です。");
+//        }
+    }
+    public void fileFinder(File folder)
+    {
+        File[] files = folder.listFiles();
+        if (files != null) {
             for (File file : files) {
-                if(file.exists()) {
+                if (file.isDirectory()) {
+                    fileFinder(file); // 再帰的にフォルダの中身を表示
+                } else {
                     this.api(file);
-                    // System.out.println(file.getName());
+//                    System.out.println(file.getName());
                 }
             }
         }
-        else {
-            System.out.println("フォルダは空です。");
-        }
     }
+
 
     public void api(File file) {
         try {
             Api api = new Api();
             String apiUrl = api.API_URL;
+            String apiKey = api.API_KEY;
 
             // ファイルからソースコードを読み取る
             String sourceCodeFilePath = file.toString();
@@ -90,6 +107,7 @@ public class FolderContents
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiUrl))
                     .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer " + apiKey)
                     .POST(HttpRequest.BodyPublishers.ofString(payload))
                     .build();
 
