@@ -15,7 +15,7 @@ public class FolderContents
         // 使用するapiのエンジンの記載
         private final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
         // api keyの記載
-        private final String API_KEY = "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";
+        private final String API_KEY = "YOUR_API_KEY";
 
     }
     public void main(String... args)
