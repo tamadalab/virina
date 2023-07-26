@@ -2,24 +2,20 @@ package virina;
 
 import java.io.BufferedReader;
 import java.io.File;
-//import org.apache.http.client.methods.HttpPost;
-//import org.apache.http.entity.StringEntity;
-//import org.apache.http.impl.client.HttpClients;
 import java.io.FileReader;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-//import java.nio.file.Path;
 
 
 public class FolderContents
 {
     class Api{
         // 使用するapiのエンジンの記載
-        private final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5/completions";
+        private final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
         // api keyの記載
-        private final String API_KEY = "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";
+        private final String API_KEY = "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";
 
     }
     public void main(String... args)
@@ -46,32 +42,23 @@ public class FolderContents
             return;
         }
 
-//        File[] files = folder.listFiles();
         this.fileFinder(folder);
 
-//        if (files != null && files.length > 0) {
-//            System.out.println("フォルダの中身:");
-//            for (File file : files) {
-//                if(file.exists()) {
-//                    this.api(file);
-//                    // System.out.println(file.getName());
-//                }
-//            }
-//        }
-//        else {
-//            System.out.println("フォルダは空です。");
-//        }
     }
     public void fileFinder(File folder)
     {
         File[] files = folder.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
+        if (files != null)
+        {
+            for (File file : files)
+            {
+                if (file.isDirectory())
+                {
                     fileFinder(file); // 再帰的にフォルダの中身を表示
-                } else {
+                }
+                else
+                {
                     this.api(file);
-//                    System.out.println(file.getName());
                 }
             }
         }
