@@ -9,24 +9,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 class Api{
-    public static final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
-    public static final String API_KEY = "YOUR_API_KEY";
     // 使用するapiのエンジンの記載
-//    private static final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
-    // api keyの記載
-//    private static final String API_KEY = "YOUR_API_KEY";
-
+    public static final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
+    // YOUR_API_KEYの記載
+    public static final String API_KEY = "YOU_API_KEY";
 }
 
 public class FolderContents
 {
-//    class Api{
-//        // 使用するapiのエンジンの記載
-//        private final String API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
-//        // api keyの記載
-//        private final String API_KEY = "YOUR_API_KEY";
-//
-//    }
     public static void main(String... args)
     {
         if (args.length == 0) {
