@@ -12,7 +12,7 @@ class Api{
     // 使用するapiのエンジンの記載
     public static final String API_URL = "https://api.openai.com/v1/chat/completions";
     // YOUR_API_KEYの記載
-    public static final String API_KEY = "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";
+    public static final String API_KEY = "YOUR _API＿KEY";
 
     public static final String API_MODEL = "gpt-3.5-turbo";
 }
