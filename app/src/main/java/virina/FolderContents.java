@@ -12,7 +12,7 @@ class Api{
     // 使用するapiのエンジンの記載
     public static final String API_URL = "https://api.openai.com/v1/chat/completions";
     // YOUR_API_KEYの記載
-    public static final String API_KEY = "YOUR _API＿KEY";
+    public static final String API_KEY = "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";
 
     public static final String API_MODEL = "gpt-3.5-turbo";
 }
@@ -68,7 +68,6 @@ public class FolderContents
 
     public static void api(File file) {
         try {
-//            Api api = new Api();
             String apiUrl = Api.API_URL;
             String apiKey = Api.API_KEY;
             String apimodel = Api.API_MODEL;
@@ -84,10 +83,14 @@ public class FolderContents
             }
 
             // 質問内容
-            String question = "You will be asked to determine if the source code you are about to present was written by you.If it is, answer \"yes\"; if not, answer \"no\".";
+            String question = "You will be asked to determine if the source code you are about to present was written by you. If it is, answer \"yes\"; if not, answer \"no\".\n";
 
             // ソースコードと質問をパッケージ化
-            String payload = "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"" + question + sourceCodeContent.toString().replace("\"", "\\\"") + "\"}]}";
+            String payload = "{" +
+                    "\"model\": \"" + apimodel + "\", " +
+                    "\"messages\": [{\"role\": \"user\", " +
+                    "\"content\": \"" + question + "code\\\"\n" + sourceCodeContent.toString().replace("\"", "\\\"") + "\\\"\n\"}]" +
+                    "}";
 
             // httpクライアントの初期化
             HttpClient httpClient = HttpClient.newHttpClient();
