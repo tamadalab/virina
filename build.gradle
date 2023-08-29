@@ -29,6 +29,12 @@ application {
     mainClass = 'virina.App'
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "virina.FolderContents"
+    }
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
