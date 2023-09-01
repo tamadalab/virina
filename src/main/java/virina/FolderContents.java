@@ -87,7 +87,7 @@ public class FolderContents
 
             // ソースコードと質問をパッケージ化
             String payload = "{" +
-                    "\"model\": \"" + apimodel + "\", " +
+//                    "\"model\": \"" + apimodel + "\", " +
                     "\"messages\": [{\"role\": \"user\", " +
                     "\"content\": \"" + question + "code\\\"\n" + sourceCodeContent.toString().replace("\"", "\\\"") + "\\\"\n\"}]" +
                     "}";
