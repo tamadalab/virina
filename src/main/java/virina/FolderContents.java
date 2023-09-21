@@ -12,7 +12,7 @@ class Api{
     // 使用するapiのエンジンの記載
     public static final String API_URL = "https://api.openai.com/v1/chat/completions";
     // YOUR_API_KEYの記載
-    public static final String API_KEY = "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";
+    public static final String API_KEY = "YOUR_API_KEY";
 
     public static final String API_MODEL = "gpt-3.5-turbo";
 }
@@ -112,7 +112,7 @@ public class FolderContents
 
             // APIにリクエストを送信
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200 && (response.statusCode() != 401 && response.statusCode() != 400)) {
+            if (response.statusCode() != 200 && response.statusCode() != 401 ) {
                 // Error 401以外のエラーコードの場合
                 System.out.println("Error Code: " + response.statusCode());
             }
