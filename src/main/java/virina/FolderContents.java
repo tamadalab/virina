@@ -78,26 +78,21 @@ public class FolderContents
             try (BufferedReader reader = new BufferedReader(new FileReader(sourceCodeFilePath))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    sourceCodeContent.append(line).append("\n");
+                    sourceCodeContent.append(line).append("\\n");
                 }
             }
-//            String newSourceCodeContent = sourceCodeContent.toString().replace("\"", "\\");
+            String newSourceCodeContent = sourceCodeContent.toString().replace("\"", "\\\"");
 
             // 質問内容
-            String question = "You will be asked to determine if the source code you are about to present was written by you. If it is, answer \"yes\", if not, answer \"no\".";
+            String question = "You will be asked to determine if the source code you are about to present was written by you. If it is, answer yes, if not, answer no.";
 
             // ソースコードと質問をパッケージ化
             String payload = "{" +
                     "\"model\": \"" + apimodel +"\", " +
-                    "\"message\": [{\"role\": \"user\", " +
-                    "\"content\": \""+question+"\"\n" +
-                    "\"code\": \""+sourceCodeContent+"\"\n}]" +
-                    "\n}";
-//            String payload = "{" +
-//                    "\"model\": \"" + apimodel + "\", " +
-//                    "\"messages\": [{\"role\": \"user\", " +
-//                    "\"content\": \"" + question + "code\"\"\"\n" + sourceCodeContent.toString() + "\"\"\"\n\"}]" +
-//                    "}";
+                    "\"messages\": [{\"role\": \"user\", " +
+                    "\"content\": \""+ question + newSourceCodeContent+"\"" +
+                    "}]" +
+                    "}";
 
             // httpクライアントの初期化
             HttpClient httpClient = HttpClient.newHttpClient();
@@ -109,14 +104,17 @@ public class FolderContents
                     .header("Authorization", "Bearer " + apiKey)
                     .POST(HttpRequest.BodyPublishers.ofString(payload))
                     .build();
-
             // APIにリクエストを送信
+            System.out.println(payload);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+//            System.out.println("Result: " + response.body());
             if (response.statusCode() != 200 && response.statusCode() != 401 ) {
                 // Error 401以外のエラーコードの場合
-                System.out.println("Error Code: " + response.statusCode());
+                System.out.println("Error: " + response.body());
             }
-            System.out.println(response);
+            else{
+                System.out.println("Result: " + response.body());
+            }
         } catch (Exception err) {
             err.printStackTrace();
         }
