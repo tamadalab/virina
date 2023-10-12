@@ -1,4 +1,4 @@
-public class Test1 {
+public class Test1 { // AIが書いたもの
     public static void main(String[] args) {
         // 引数が提供されているかどうかを確認
         if (args.length < 1) {

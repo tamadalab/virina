@@ -1,19 +1,11 @@
-import java.util.Random;
-
+import java.lang.StringBuilder;
 public class Test2
-{
+{ // 実際に書いたもの
     public static void main(String... args)
     {
-        Random randnum = new Random();
-        Integer createNum = rand.nextInt(101);
-
-        if(createNum % 2 == 0)
-        {
-            System.out.println(createNum+"は偶数です。");
-        }
-        else
-        {
-            System.out.println(createNum+"は奇数です。");
-        }
+        String normalString = args[0];
+        String reverseString = new StringBuilder(args[0]).reverse().toString();
+        System.out.println("入力した文字: "+normalString);
+        System.out.println("逆順出力: "+reverseString);
     }
 }
