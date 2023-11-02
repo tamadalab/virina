@@ -12,7 +12,7 @@ class Api{
     // 使用するapiのエンジンの記載
     public static final String API_URL = "https://api.openai.com/v1/chat/completions";
     // YOUR_API_KEYの記載
-    public static final String API_KEY = "YOR_API_KEY";
+    public static final String API_KEY = "YOUR_API_KEY";
 
     public static final String API_MODEL = "gpt-3.5-turbo";
 }
@@ -59,7 +59,9 @@ public class FolderContents
                 }
                 else
                 {
-                    api(file);
+                    if(!file.getName().equals(".DS_Store")){
+                        api(file);
+                    }
                 }
             }
         }
@@ -89,7 +91,7 @@ public class FolderContents
             // ソースコードと質問をパッケージ化
             String payload = "{" +
                     "\"model\": \"" + apimodel +"\", " +
-                    "\"temperature\": 0.2,"+
+                    "\"temperature\": 0.1,"+
                     "\"messages\": [{\"role\": \"user\", " +
                     "\"content\": \""+ question + newSourceCodeContent+"\"" +
                     "}]" +
@@ -106,7 +108,7 @@ public class FolderContents
                     .POST(HttpRequest.BodyPublishers.ofString(payload))
                     .build();
             // APIにリクエストを送信
-            System.out.println(payload);
+            System.out.println(file.getName());
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 //            System.out.println("Result: " + response.body());
             if (response.statusCode() != 200 && response.statusCode() != 401 ) {
