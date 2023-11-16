@@ -86,7 +86,7 @@ public class FolderContents
             String newSourceCodeContent = sourceCodeContent.toString().replace("\"", "\\\"");
 
             // 質問内容
-            String question = "You will be asked to determine if the source code you are about to present was written by you. If it is, answer yes, if not, answer no. Also, please judge mainly on the basis of the name of the identifier and indentation. Please indicate how reliable your judgment is on a scale from 0 to 100.";
+            String question = "You will be asked to determine if the source code you are about to present was written by you. If it is, answer yes, if not, answer no. Also, please judge mainly on the basis of the name of the identifier and method, and indentation. Please indicate how reliable your judgment is on a scale from 0 to 100.";
 
             // ソースコードと質問をパッケージ化
             String payload = "{" +
