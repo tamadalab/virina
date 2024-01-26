@@ -6,6 +6,6 @@ class FolderContentsTest {
     @Test
     void main() {
         FolderContents testMain = new FolderContents();
-        testMain.main("./testdata");
+        testMain.main("./testdata", "20");
     }
 }
