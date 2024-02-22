@@ -14,8 +14,7 @@ class Api{
     // YOUR_API_KEYの記載
     public static final String API_KEY = "YOUR_API_KEY";
 
-    public static final String API_MODEL = "gpt-3.5-turbo";
-    // public static final String API_MODEL = "gpt-4";
+    public static final String API_MODEL = "使用したいmodel";
 
 }
 
@@ -23,15 +22,16 @@ public class FolderContents
 {
     public static void main(String... args)
     {
-        if (args.length == 0) {
+        if (args.length == 0) 
+        {
             System.out.println("フォルダを指定してください。");
 //            return;
-        } else {
-            Double valueOfTokens = Double.valueOf(args[1]);
-            fileChecker(args[0], valueOfTokens);
+        } else 
+        {
+            fileChecker(args[0]);
         }
     }
-    public static void fileChecker(String folders, Double valueOfTokens)
+    public static void fileChecker(String folders)
     {
         String folderPath = folders;
         File folder = new File(folderPath);
@@ -46,10 +46,10 @@ public class FolderContents
             return;
         }
 
-        fileFinder(folder, valueOfTokens);
+        fileFinder(folder);
 
     }
-    public static void fileFinder(File folder, Double valueOfTokens)
+    public static void fileFinder(File folder)
     {
         File[] files = folder.listFiles();
         if (files != null)
@@ -58,12 +58,18 @@ public class FolderContents
             {
                 if (file.isDirectory())
                 {
-                    fileFinder(file, valueOfTokens); // 再帰的にフォルダの中身を表示
+                    fileFinder(file); // 再帰的にフォルダの中身を表示
                 }
                 else
                 {
-                    if(!file.getName().equals(".DS_Store")){
-                        api(file, valueOfTokens);
+                    if(!file.getName().equals(".DS_Store"))
+                    {
+                        Integer repeat = 1;
+                        while(repeat < 11)
+                        {
+                            api(file);
+                            repeat += 1;
+                        }
                     }
                 }
             }
@@ -71,8 +77,10 @@ public class FolderContents
     }
 
 
-    public static void api(File file, Double valueOfTokens) {
-        try {
+    public static void api(File file) 
+    {
+        try 
+        {
             String apiUrl = Api.API_URL;
             String apiKey = Api.API_KEY;
             String apimodel = Api.API_MODEL;
@@ -80,9 +88,11 @@ public class FolderContents
             // ファイルからソースコードを読み取る
             String sourceCodeFilePath = file.toString();
             StringBuilder sourceCodeContent = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new FileReader(sourceCodeFilePath))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(sourceCodeFilePath))) 
+            {
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null) 
+                {
                     sourceCodeContent.append(line).append("\\n");
                 }
             }
@@ -112,7 +122,8 @@ public class FolderContents
             // APIにリクエストを送信
             System.out.println(file.getName());
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200 && response.statusCode() != 401 ) {
+            if (response.statusCode() != 200 && response.statusCode() != 401 ) 
+            {
                 // Error 401以外のエラーコードの場合
                 System.out.println("Error: " + response.body());
             }
